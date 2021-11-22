@@ -64,20 +64,11 @@ montantTTC = montantHT + montantTVA;
 console.log(`Pour un montant HT de ${montantHT}€, nous payons un TTC de ${montantTTC}€. Le montant de la TVA est donc de ${montantTVA}€`);
 
 console.clear();
-//tableaux
+/***************************
+exo date
+***********************/
 
-let weekDays = new Array();
-weekDays[0] = "Dimanche";
-weekDays[1] = "Lundi";
-weekDays[2] = "Mardi";
-weekDays[3] = "Mercredi";
-weekDays[4] = "jeudi";
-weekDays[5] = "Vendredi";
-weekDays[6] = "Samedi";
-
-console.table(weekDays);
-
-weekDays = [
+let weekDays = [
     "Dimanche",
     "Lundi",
     "Mardi",
@@ -88,9 +79,63 @@ weekDays = [
 ]
 console.table(weekDays);
 
+let months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"]
+
 //crée un objet date à la date du jour
 let today = new Date();
 
 //Récupérer le jour de la semaine en cours
 let dayIndex = today.getDay();
 console.log(weekDays[dayIndex]);
+//Récupérer le mois en cours
+let monthIndex = today.getMonth();
+console.log(months[monthIndex]);
+//Récupérer le jour en cours
+let date = today.getDate();
+console.log(date);
+//Récupérer l'année' en cours
+let year = today.getFullYear();
+console.log(year);
+
+console.clear();
+
+/***************************
+ *Objets
+************************/
+
+//Propriétés / attributs constituent un objet
+
+//Version longue
+let toto = new Object();
+//ajout des propriétés
+toto.lastName = "Gribouille";
+toto.firstName = "Toto";
+toto.age = 12;
+toto.nation = "GB";
+toto.city = "London";
+console.log(toto);
+
+let lulu = {
+    lastName:"Gribouille",
+    firstName: "Lucienne",
+    age : 18,
+    nation: "FR",
+    city: "Marseille",
+};
+
+//Tableau des personnages
+let persos = [toto, 
+    lulu,
+    {
+        lastName:"Gaubert",
+        firstName: "Roida",
+        age : 88,
+        nation: "FR",
+        city: "Lyon",
+        schools:["Ecole1", "Ecole2", "Ecole3"],
+    },
+];
+
+console.table(persos);
+
+persos.forEach((ligne)=>console.log(ligne.firstName, ligne.lastName, ligne.age));
