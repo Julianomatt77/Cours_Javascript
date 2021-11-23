@@ -69,7 +69,7 @@ switch (meteo) {
  */
 
 //demande à l'utilisateur de saisir un nbre tant que ce nombre n'est pas supérieur à 100
-
+/*
 let nb = prompt("Entrez un nombre supérieur à 100");
 
 while(nb<100){
@@ -82,3 +82,45 @@ let nb2;
 do{
     nb2 = prompt("Entrez un nombre inférieur à 100");
 } while (nb2>=100);
+*/
+/****************
+ * Boucles
+ */
+console.clear;
+ let table = [
+    "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "jeudi",
+    "Vendredi",
+    "Samedi"
+]
+
+//While
+console.log("----While-------");
+let index=0;
+while (index <table.length) {
+    console.log(table[index]);
+    index++;
+}
+
+//FOR
+console.log("----FOR-------");
+for (let i = 0; i < table.length; i++){
+    console.log(table[i])
+}
+
+//FOR....OF
+console.log("----FOR.....OF-------");
+for (let ligne of table) {
+    console.log(ligne);
+}
+
+//FOR....EACH
+console.log("----FOREACH-------");
+table.forEach(function(ligne, index){
+    console.log(ligne);
+});
+
+table.forEach((ligne, index) => console.log(ligne));
