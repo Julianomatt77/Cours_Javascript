@@ -6,12 +6,22 @@ let playerDamagePoint;
 
 const DIV = document.querySelector("#game");
 
-console.log(game);
-initializeGame();
-startGame();
-gameLoop();
-showGameWinner();
+function displayHideWinner(){
+    let article = document.querySelector("#game article");
+    //méthode manuelle
+    /*if (article.classList.contains("hide")){
+       article.classList.remove("hide");
+    } else {
+        article.classList.add("hide");
+    }*/
+    
+    //méthode auto
+    article.classList.toggle("hide");
+}
 
+document.querySelector("#go").addEventListener("click", startGame);
+
+document.querySelector("#toggleWinner").addEventListener("click", displayHideWinner);
 
 //Ajouter Difficulté
 /*

@@ -70,6 +70,7 @@ function initializeGame(){
             break;
     }
     game.round = 1;
+    displayHp();
 }
 
 //Définition des points de dégat du dragon(avec bonus/malus)
@@ -113,7 +114,6 @@ function gameLoop(){
     //Le jeu a lieu tant que les 2 sont en vie
     while (game.playerLife > 0 && game.dragonLife > 0){
 
-        console.log(`Tour de jeu N°${game.round}`);
         DIV.innerHTML += `<h3>----Tour de jeu N°${game.round}----</h3>`;
 
         //Détermination du + rapide        
@@ -125,16 +125,35 @@ function gameLoop(){
         if (playerSpeed > dragonSpeed){
             damagePoint = computePlayerDamagePoint();
             game.dragonLife -=  damagePoint;
-            console.log(`Vous êtes plus rapide et frappez le dragon, vous lui enlevez ${damagePoint} PV`);
+            if (game.dragonLife < 0) game.dragonLife = 0;
             DIV.innerHTML += `<p>Vous êtes plus rapide et frappez le dragon, vous lui enlevez ${damagePoint} PV</p>`;
         } else {
             damagePoint = computeDragonDamagePoint();
             game.playerLife -= damagePoint;
-            console.log(`Le dragon est plus rapide que vous et vous brûle, il vous enlève ${damagePoint} PV`);
+            if (game.playerLife < 0) game.playerLife = 0;
             DIV.innerHTML += `<p>Le dragon est plus rapide que vous et vous brûle, il vous enlève ${damagePoint} PV</p>`;
         }
-        console.log(`Points de vie du dragon: ${game.dragonLife}, Points de vie du joueur:  ${game.playerLife}`);                
-        DIV.innerHTML += `<table>
+                       
+        displayHp();        
+        game.round++;
+    }
+}
+
+//Affichage du vainqueur
+function showGameWinner(){
+    DIV.innerHTML = "<article></article>" + DIV.innerHTML;
+    const WINNER = document.querySelector("#game article");
+    if (game.dragonLife <= 0){
+        
+        WINNER.innerHTML += `<img src='img/knight.png'><p>Félicitation vous avez gagné !</p><p>Il vous restait ${game.playerLife} PV</p>`;
+    } else {
+        
+        WINNER.innerHTML += `<img src='img/dragon.png'><p>Désolé vous avez perdu, le dragon vous a défoncé !</p><p>Il lui restait ${game.dragonLife} PV</p>`;
+    }
+}
+
+function displayHp(){
+    DIV.innerHTML += `<table>
         <thead>
           <tr>
             <th>Personnage</th>
@@ -151,44 +170,12 @@ function gameLoop(){
             <td>${game.dragonLife}</td>
           </tr>
         </tbody>
-      </table>`;        
-        game.round++;
-    }
+      </table>`;  
 }
 
 //Définition du début du jeu
 function startGame(){
-    console.log(`Début du jeu, \n Points de vie du dragon: ${game.dragonLife}, Points de vie du joueur:  ${game.playerLife}`);
-    DIV.innerHTML = `<h2>Points de vie du départ !</h2> <table>
-    <thead>
-      <tr>
-        <th>Personnage</th>
-        <th>PV</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td>Chevalier</td>
-          <td>${game.playerLife}</td>
-      </tr>
-      <tr>
-        <td>Dragon</td>
-        <td>${game.dragonLife}</td>
-      </tr>
-    </tbody>
-  </table>`;    
-}
-
-//Affichage du vainqueur
-function showGameWinner(){
-    DIV.innerHTML = "<div></div>" + DIV.innerHTML;
-    const WINNER = document.querySelector("#game div");
-    if (game.dragonLife <=0){
-        console.log(`Félicitation vous avez gagné !`);
-        WINNER.innerHTML += `<img src='img/knight.png'><p>Félicitation vous avez gagné !</p><p>Il vous restait ${game.playerLife} PV</p>`;
-    }
-    if (game.playerLife <= 0){
-        console.log(`Désolé vous avez perdu, le dragon a gagné !`);
-        WINNER.innerHTML += `<img src='img/dragon.png'><p>Désolé vous avez perdu, le dragon a gagné !</p><p>`;
-    }
+    initializeGame();
+    gameLoop();
+    showGameWinner();  
 }
