@@ -17,7 +17,6 @@ let deselectAll = document.querySelector("#deselectAll");
 
 function countImage(){
     let selectedPhotos = document.querySelectorAll(".photo-list li.selected");
-    
     document.querySelector("#total em").textContent = selectedPhotos.length;
 }
 
